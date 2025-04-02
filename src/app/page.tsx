@@ -1,103 +1,143 @@
-import Image from "next/image";
+"use client";
+
+import { PageHeader } from "@/components/PageHeader";
+import { WorkCard } from "@/components/WorkCard";
+import {
+    motion,
+    useScroll,
+    useTransform,
+    AnimatePresence,
+} from "framer-motion";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+import { useState } from "react";
+
+type DirectionType = "forwards" | "backwards";
 
 export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+    const { scrollYProgress } = useScroll();
+    const backgroundY = useTransform(scrollYProgress, [0, 1], ["0%", "80%"]);
+    const [currentIndex, setCurrentIndex] = useState(0);
+    const [direction, setDirection] = useState<DirectionType>("forwards");
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+    // Example cards array - replace with your actual cards
+    const cards = Array.from({ length: 100 }, (_, i) => ({
+        id: i + 1,
+        content: <WorkCard title={`Work ${i + 1}`} />,
+    }));
+
+    const slideVariants = {
+        enter: (direction: DirectionType) => ({
+            x: direction === "forwards" ? 1500 : "65%",
+            opacity: 0.5,
+            scale: 0.9,
+        }),
+        // center isnt actually center because of the right card lol, thats why its not going to the middle
+        center: {
+            x: 0,
+            opacity: 1,
+            scale: 1,
+        },
+        exit: (direction: DirectionType) => ({
+            x: direction === "backwards" ? "65%" : "-65%",
+            opacity: 0.5,
+            scale: 0.9,
+        }),
+    };
+
+    const nextCard = () => {
+        setDirection("forwards");
+        setCurrentIndex((prev) => (prev + 1) % cards.length);
+    };
+
+    const prevCard = () => {
+        setDirection("backwards");
+        setCurrentIndex((prev) => (prev - 1 + cards.length) % cards.length);
+    };
+
+    return (
+        <div className="flex flex-col w-full h-full scroll-y-auto overflow-x-hidden">
+            {/* only show page header when scrolling down */}
+            <PageHeader />
+
+            <div className="flex flex-col w-full h-[80vh] px-20 py-4 relative overflow-hidden">
+                <motion.div
+                    className="absolute inset-0 z-0"
+                    style={{
+                        backgroundImage: "url('/grayMountain.jpg')",
+                        backgroundSize: "100% 130%",
+                        backgroundPosition: "center center",
+                        backgroundRepeat: "no-repeat",
+                        y: backgroundY,
+                    }}
+                />
+                <div className="absolute inset-0 bg-gray-800/40 mix-blend-multiply z-[1]" />
+
+                <div className="flex flex-col justify-center h-[90%] relative z-10">
+                    <p className="text-8xl font-bold text-white">
+                        Empowering people
+                        <br />
+                        through software
+                    </p>
+                </div>
+                <div className="flex justify-end w-full h-[10%] text-white relative z-10">
+                    <div className="flex flex-col">
+                        <p className="text-xl font-bold">
+                            Naiyarat Hanmatheekuna
+                        </p>
+                        <p className="text-l font-medium text-zinc-300">
+                            Software Engineer
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div className="bg-gradient-to-l from-neutral-900 to-[#182430] w-full h-[200vh] flex justify-center py-12 relative">
+                <div className="flex flex-col w-full justify-center h-[60vh] items-center">
+                    <motion.div className="absolute left-[-15%] w-1/3 opacity-50 scale-90 pointer-events-none">
+                        {/* {currentIndex > 0 &&
+                            cards[
+                                (currentIndex - 1 + cards.length) % cards.length
+                            ].content} */}
+                        {cards[0].content}
+                    </motion.div>
+
+                    <div className="flex w-full justify-center h-full items-center">
+                        <button
+                            onClick={prevCard}
+                            // disabled={currentIndex === 0}
+                        >
+                            <ChevronLeft className="text-neutral-300 w-12 h-12" />
+                        </button>
+                        <AnimatePresence initial={false} custom={direction}>
+                            <motion.div
+                                className="w-1/2 justify-center"
+                                key={currentIndex}
+                                custom={direction}
+                                variants={slideVariants}
+                                initial="enter"
+                                animate="center"
+                                exit="exit"
+                                transition={{
+                                    duration: 1,
+                                    ease: "easeInOut",
+                                }}
+                            >
+                                {cards[currentIndex].content}
+                            </motion.div>
+                        </AnimatePresence>
+                        <button
+                            onClick={nextCard}
+                            disabled={currentIndex === cards.length - 1}
+                        >
+                            <ChevronRight className="text-neutral-300 w-12 h-12" />
+                        </button>
+                    </div>
+                    <div className="absolute right-[-15%] w-1/3 opacity-50 scale-90 pointer-events-none">
+                        {/* {currentIndex < cards.length - 1 &&
+                            cards[(currentIndex + 1) % cards.length].content} */}
+                        {cards[0].content}
+                    </div>
+                </div>
+            </div>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
-  );
+    );
 }
