@@ -14,6 +14,7 @@ import {
 import { useEffect } from "react";
 import { siGithub } from "simple-icons";
 import { Linkedin } from "lucide-react";
+import Link from "next/link";
 
 
 export default function Home() {
@@ -99,7 +100,7 @@ export default function Home() {
 
                         </div>
                         <div className="flex space-x-3">
-                            <a
+                            <Link
                             href="https://github.com/naiyarat">
                                 <svg
                                     width={24}
@@ -110,16 +111,16 @@ export default function Home() {
                                 >
                                     <path d={siGithub.path} />
                                 </svg>
-                            </a>
-                            <a href="https://www.linkedin.com/in/naiyarat-hanmatheekuna-b079a12a0/">
+                            </Link>
+                            <Link href="https://www.linkedin.com/in/naiyarat-hanmatheekuna-b079a12a0/">
                                 <Linkedin color="white"/>
-                            </a>
-                            <a
+                            </Link>
+                            <Link
                             href="/Resume2025.pdf"
                             target="_blank"
                             rel="noopener noreferrer">
                                 <p className="underline text-white font-light">resume</p>
-                            </a>
+                            </Link>
                         </div>
                     </motion.section>
 
@@ -128,7 +129,7 @@ export default function Home() {
             
             {/* <PageHeader /> */}
 
-            <div className="bg-gradient-to-l from-neutral-900 to-gray-900 w-full h-[200vh] flex justify-center relative">
+            <div className="bg-gradient-to-l from-neutral-900 to-zinc-950 w-full h-[200vh] flex justify-center relative">
                 <div className="flex flex-col w-full justify-center h-[60vh] items-center space-y-48">
 
                     {/* anchors for scroll */}
