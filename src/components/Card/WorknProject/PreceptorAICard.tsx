@@ -8,7 +8,8 @@ export const PreceptorAICard = () => {
         role="Intern"
         timeline="2021 – 2022"
         imageURL="/SSSM.png"
-        alt='SSSM'
+          alt='SSSM'
+        bgColor="teal-400/20"
         subtitle='Training a medical LLM'
       />
   )

@@ -13,9 +13,10 @@ interface WorkCardProps {
     size?: number;
     link?: string;
     subtitle?: string;
+    bgColor?: string
 }
 
-export const WorkCard = ({ title, role, timeline, imageURL, alt, link, size = 600, subtitle }: WorkCardProps) => {
+export const WorkCard = ({ title, role, timeline, imageURL, alt, link, size = 600, bgColor = "red-600/20", subtitle }: WorkCardProps) => {
     const route = useRouter()
     const cardVariants = {
         hover: {
@@ -33,7 +34,7 @@ export const WorkCard = ({ title, role, timeline, imageURL, alt, link, size = 60
       
     return (
         <motion.div
-            className="bg-gradient-to-t from-red-600/20 via-gray-900 w-full h-[60vh] rounded-2xl border-[1px] border-gray-700 cursor-pointer shadow-[0_4px_15px_rgba(255,255,255,0.1)]"
+            className={`bg-gradient-to-t from-${bgColor} via-gray-900 w-full h-[60vh] rounded-2xl border-[1px] border-gray-700 cursor-pointer shadow-[0_4px_15px_rgba(255,255,255,0.1)]`}
             variants={cardVariants}
             whileHover="hover"
             onClick={() => route.push(link || '')}

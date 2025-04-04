@@ -9,6 +9,7 @@ export const TestSimCard = () => {
         timeline="2024 – present"
         imageURL="/InterpassTestSimulator.png"
         alt='Truth wallet'
+        bgColor="blue-400/20"      
         size={480}
         subtitle='Redesigning an outdated testing system'
       />

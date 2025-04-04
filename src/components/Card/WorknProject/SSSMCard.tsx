@@ -10,6 +10,7 @@ export const SSSMCard = () => {
         imageURL="/SSSM.png"
         size={640}
         alt='SSSM'
+        bgColor="fuchsia-500/20"      
         subtitle='Creating an ERP tailored towards restaurants'
       />
   )
