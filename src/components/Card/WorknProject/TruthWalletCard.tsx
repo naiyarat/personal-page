@@ -1,5 +1,5 @@
-import React from 'react';
-import { WorkCard } from '../WorkCard';
+import React from "react";
+import { WorkCard } from "../WorkCard";
 
 export const TruthWalletCard = () => {
     return (
@@ -10,6 +10,7 @@ export const TruthWalletCard = () => {
             imageURL="/TruthWallet.png"
             alt="Truth wallet"
             subtitle="Designing a finance system for an amusement park"
+            link="/worknproject/TruthWallet"
         />
     );
 };

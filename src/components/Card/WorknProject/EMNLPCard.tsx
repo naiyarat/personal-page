@@ -1,5 +1,5 @@
-import React from 'react';
-import { WorkCard } from '../WorkCard';
+import React from "react";
+import { WorkCard } from "../WorkCard";
 
 export const ResearchCard = () => {
     return (
@@ -11,6 +11,7 @@ export const ResearchCard = () => {
             alt="research"
             bgColor="white/20"
             subtitle="Researching on the translation ability of quantized LLMs"
+            link="/worknproject/EMNLPResearch"
         />
     );
 };

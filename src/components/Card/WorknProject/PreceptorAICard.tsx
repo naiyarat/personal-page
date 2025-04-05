@@ -1,5 +1,5 @@
-import React from 'react';
-import { WorkCard } from '../WorkCard';
+import React from "react";
+import { WorkCard } from "../WorkCard";
 
 export const PreceptorAICard = () => {
     return (
@@ -11,6 +11,7 @@ export const PreceptorAICard = () => {
             alt="PreceptorAI"
             bgColor="teal-400/20"
             subtitle="Training a medical LLM"
+            link="/worknproject/PreceptorAI"
         />
     );
 };

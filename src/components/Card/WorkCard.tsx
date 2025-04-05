@@ -1,8 +1,9 @@
-'use client';
-import { motion } from 'framer-motion';
-import Image from 'next/image';
-import { useRouter } from 'next/navigation';
-import React from 'react';
+"use client";
+import { motion } from "framer-motion";
+import Image from "next/image";
+import { useRouter } from "next/navigation";
+import React from "react";
+import { bgColorMap } from "@/constants/colors";
 
 interface WorkCardProps {
     title: string;
@@ -16,16 +17,6 @@ interface WorkCardProps {
     bgColor?: string;
 }
 
-// Color mapping for background colors
-const bgColorMap: Record<string, string> = {
-    'red-600/20': 'from-red-600/20',
-    'fuchsia-500/20': 'from-fuchsia-500/20',
-    'teal-400/20': 'from-teal-400/20',
-    'blue-400/20': 'from-blue-400/20',
-    'white/20': 'from-white/20',
-    // Add more colors as needed
-};
-
 export const WorkCard = ({
     title,
     role,
@@ -33,36 +24,36 @@ export const WorkCard = ({
     imageURL,
     alt,
     link,
-    bgColor = 'red-600/20',
+    bgColor = "red-600/20",
     subtitle,
 }: WorkCardProps) => {
     const route = useRouter();
     const cardVariants = {
         hover: {
-            backgroundColor: '#1e2939',
-            boxShadow: '0 10px 30px rgba(255, 255, 255, 0.1)',
+            backgroundColor: "#1e2939",
+            boxShadow: "0 10px 30px rgba(255, 255, 255, 0.1)",
         },
     };
 
     const imageVariants = {
         hover: {
             scale: 1.05,
-            y: -10,
+            y: -12,
         },
     };
 
     // Get the mapped color class or use a default
-    const bgColorClass = bgColorMap[bgColor] || 'from-red-600/20';
+    const bgColorClass = bgColorMap[bgColor] || "from-red-600/20";
 
     return (
         <motion.div
             className={`bg-gradient-to-t ${bgColorClass} via-gray-900 w-full sm:h-[60vh] rounded-2xl border-[1px] border-gray-700 cursor-pointer shadow-[0_4px_15px_rgba(255,255,255,0.1)]`}
             variants={cardVariants}
             whileHover="hover"
-            onClick={() => route.push(link || '')}
+            onClick={() => route.push(link || "")}
             transition={{
                 duration: 0.5,
-                ease: 'linear',
+                ease: "linear",
             }}
         >
             {/* header */}
@@ -79,7 +70,7 @@ export const WorkCard = ({
             <motion.div
                 className="flex w-full h-[90%] justify-center"
                 variants={imageVariants}
-                transition={{ duration: 0.5, ease: 'easeInOut' }}
+                transition={{ duration: 0.5, ease: "easeInOut" }}
             >
                 <Image
                     src={imageURL}
@@ -88,7 +79,7 @@ export const WorkCard = ({
                     width={0}
                     className="rounded-t-lg mt-auto"
                     sizes="100vw"
-                    style={{ width: 'auto', height: '80%' }} // optional
+                    style={{ width: "auto", height: "80%" }} // optional
                 />
             </motion.div>
         </motion.div>
