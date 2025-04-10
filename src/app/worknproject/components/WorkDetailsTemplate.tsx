@@ -1,14 +1,14 @@
-"use client";
+'use client';
 
-import { bgColorMap } from "@/constants/colors";
-import React from "react";
+import { bgColorMap } from '@/constants/colors';
+import React from 'react';
 import {
     SectionDirectory,
     SectionDirectoryItem,
-} from "../../../components/Section/SectionDirectory";
-import Image from "next/image";
-import { motion } from "framer-motion";
-import { ChevronLeftCircle } from "lucide-react";
+} from '../../../components/Section/SectionDirectory';
+import Image from 'next/image';
+import { motion } from 'framer-motion';
+import { ChevronLeftCircle } from 'lucide-react';
 
 type WorkDetailsTemplateProps = {
     title: string;
@@ -32,10 +32,10 @@ export const WorkDetailsTemplate = ({
     children,
     directoryItems,
     subtitle,
-    bgColor = "red-600/20", // Default color same as WorkCard
+    bgColor = 'red-600/20',
 }: WorkDetailsTemplateProps) => {
     // Get the mapped color class or use default
-    const bgColorClass = bgColorMap[bgColor] || "from-red-600/20";
+    const bgColorClass = bgColorMap[bgColor] || 'from-red-600/20';
 
     return (
         <div className="w-full h-full">
@@ -48,11 +48,11 @@ export const WorkDetailsTemplate = ({
                     <motion.div
                         initial={{ x: 50, opacity: 0 }}
                         animate={{ x: 0, opacity: 1 }}
-                        transition={{ duration: 1.2, ease: "easeInOut" }}
+                        transition={{ duration: 1.2, ease: 'easeInOut' }}
                     >
                         <div className="flex items-center gap-4">
                             <button
-                                onClick={() => (window.location.href = "/")}
+                                onClick={() => (window.location.href = '/')}
                                 className="text-neutral-100 hover:text-neutral-300 transition-colors"
                             >
                                 <ChevronLeftCircle size={36} />
@@ -68,7 +68,7 @@ export const WorkDetailsTemplate = ({
                         </div>
                     </motion.div>
 
-                    <div className="flex w-full h-full justify-center relative">
+                    <div className="flex w-full h-full justify-center relative pb-6">
                         <motion.div
                             className="flex w-full h-[90%] justify-center relative"
                             initial={{ opacity: 0 }}
@@ -76,7 +76,7 @@ export const WorkDetailsTemplate = ({
                             transition={{
                                 duration: 1.2,
                                 delay: 0.3,
-                                ease: "linear",
+                                ease: 'linear',
                             }}
                         >
                             {/* Background image (slightly offset) */}
@@ -88,10 +88,10 @@ export const WorkDetailsTemplate = ({
                                 className="rounded-xs mt-7 absolute opacity-100"
                                 sizes="100vw"
                                 style={{
-                                    width: "auto",
-                                    height: "80%",
+                                    width: 'auto',
+                                    height: '80%',
                                     transform:
-                                        "translateX(-10rem) translateY(5rem)",
+                                        'translateX(-10rem) translateY(4rem)',
                                 }}
                             />
                             {/* Foreground image */}
@@ -103,9 +103,9 @@ export const WorkDetailsTemplate = ({
                                 className="rounded-xs mt-7 relative z-10"
                                 sizes="100vw"
                                 style={{
-                                    width: "auto",
-                                    height: "80%",
-                                    transform: "translateX(8rem)",
+                                    width: 'auto',
+                                    height: '80%',
+                                    transform: 'translateX(8rem)',
                                 }}
                             />
                         </motion.div>
@@ -122,20 +122,20 @@ export const WorkDetailsTemplate = ({
                 }}
                 transition={{
                     duration: 1.2,
-                    ease: "linear",
+                    ease: 'linear',
                     delay: 0.3,
                 }}
             >
-                <div className="flex sticky top-0 w-[20%] h-[80vh]">
+                <div className="flex sticky top-0 w-[30%] h-[80vh]">
                     <SectionDirectory
                         items={directoryItems}
-                        currentSectionId={"overview"}
+                        currentSectionId={'overview'}
                     />
                 </div>
-                <div className="flex flex-col w-[100%] h-[300vh] py-12 space-y-6">
+                <div className="flex flex-col w-[100%] h-full py-12 space-y-6">
                     {children}
                 </div>
-                <div className="w-[20%]" />
+                <div className="w-[30%]" />
             </motion.div>
         </div>
     );

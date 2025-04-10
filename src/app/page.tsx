@@ -1,20 +1,20 @@
-"use client";
+'use client';
 
-import { EducationCarousel } from "@/components/Carousel/EducationCarousel";
-import { WorkAndProjectsCarousel } from "@/components/Carousel/WorkAndProjectsCarousel";
-import { Line } from "@/components/Line";
-import { SectionLink } from "@/components/Section/SectionLink";
+import { EducationCarousel } from '@/components/Carousel/EducationCarousel';
+import { WorkAndProjectsCarousel } from '@/components/Carousel/WorkAndProjectsCarousel';
+import { Line } from '@/components/Line';
+import { SectionLink } from '@/components/Section/SectionLink';
 import {
     motion,
     useAnimate,
     useInView,
     useScroll,
     useTransform,
-} from "framer-motion";
-import { useEffect } from "react";
-import { siGithub } from "simple-icons";
-import { Linkedin } from "lucide-react";
-import Link from "next/link";
+} from 'framer-motion';
+import { useEffect } from 'react';
+import { siGithub } from 'simple-icons';
+import { Linkedin } from 'lucide-react';
+import Link from 'next/link';
 
 export default function Home() {
     const [scope, animate] = useAnimate();
@@ -23,20 +23,20 @@ export default function Home() {
     useEffect(() => {
         if (isInView) {
             animate(
-                "p",
+                'p',
                 { opacity: 1, x: 0 },
-                { duration: 1.2, ease: "easeInOut" }
+                { duration: 1.2, ease: 'easeInOut' }
             );
             animate(
-                "section",
+                'section',
                 { opacity: 1, x: 0 },
-                { duration: 1.2, ease: "linear" }
+                { duration: 1.2, ease: 'linear', delay: 0.3 }
             );
         }
     }, [isInView, animate]);
 
     const { scrollYProgress } = useScroll();
-    const backgroundY = useTransform(scrollYProgress, [0, 1], ["0%", "80%"]);
+    const backgroundY = useTransform(scrollYProgress, [0, 1], ['0%', '80%']);
 
     return (
         <div className="flex flex-col w-full h-full scroll-y-auto overflow-x-clip">
@@ -51,9 +51,9 @@ export default function Home() {
                     className="absolute inset-0 z-0"
                     style={{
                         backgroundImage: "url('/grayMountain.jpg')",
-                        backgroundSize: "100% 130%",
-                        backgroundPosition: "center center",
-                        backgroundRepeat: "no-repeat",
+                        backgroundSize: '100% 130%',
+                        backgroundPosition: 'center center',
+                        backgroundRepeat: 'no-repeat',
                         y: backgroundY,
                     }}
                 />
